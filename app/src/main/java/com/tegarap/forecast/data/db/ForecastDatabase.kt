@@ -4,13 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.tegarap.forecast.data.db.entity.CurrentWeatherEntry
 
 
 @Database(
-    entities = [CurrentWeatherDao::class],
+    entities = [CurrentWeatherEntry::class],
     version = 1
 )
-
 abstract class ForecastDatabase : RoomDatabase() {
     abstract fun currentWeatherDao(): CurrentWeatherDao
 
@@ -19,7 +19,7 @@ abstract class ForecastDatabase : RoomDatabase() {
         private val LOCK = Any()
 
         operator fun invoke(context: Context) = instance ?: synchronized(LOCK){
-            instance ?: buildDatabase
+            instance ?: buildDatabase(context).also { instance = it }
         }
 
         private fun buildDatabase(context: Context) =

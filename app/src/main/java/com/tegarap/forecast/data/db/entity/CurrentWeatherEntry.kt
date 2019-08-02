@@ -38,5 +38,5 @@ data class CurrentWeatherEntry(
     val visMiles: Double
 ){
     @PrimaryKey(autoGenerate = false)
-    val id: Int = CURRENT_WEATHER_ID
+    var id: Int = CURRENT_WEATHER_ID
 }
